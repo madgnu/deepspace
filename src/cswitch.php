@@ -19,11 +19,20 @@ class CNetDevice {
 	protected $alive;
 	protected $feature_list;
 	public function __construct($aIp) { $this->ip = $aIp; $this->alive(); }
-	public function alive() { if (ping($this->ip, 1, 3)) $this->alive = true; else $this->alive = false; return $this->alive; }
+	public function alive() {
+        if (ping($this->ip, 1, 3)) $this->alive = true;
+        else $this->alive = false; return $this->alive;
+    }
 	public function get_ip() { return $this->ip; }
-	public function feature_list() { global $consts; $features = &$consts['FEATURES']; return $features['GENERAL']['NetDevice']; }
+	public function feature_list() {
+        global $consts; $features = &$consts['FEATURES'];
+        return $features['GENERAL']['NetDevice'];
+    }
 	public function mgm_vlan() { return ManagmentVlanFromIP($this->ip); }
-	public function check_interface_methods() { $this->interface_method = method_unknown; return $this->interface_method; }
+	public function check_interface_methods() {
+        $this->interface_method = method_unknown;
+        return $this->interface_method;
+    }
 	public function feature($feature) {
 		if (!isset($feature)) return false;
 		if (strstr($this->feature_list(), ':'.$feature.':')) return true;
@@ -72,14 +81,17 @@ class CSwitch extends CNetDevice {
 		$features = &$consts['FEATURES'];
 		$r = parent::feature_list();
 		$r = $features['GENERAL']['Switch'].$r;
-		if ($this->snmp_ro_avail || $this->snmp_rw_avail) $r = $features['SNMPRO']['Switch'].$r;
+		if ($this->snmp_ro_avail || $this->snmp_rw_avail)
+            $r = $features['SNMPRO']['Switch'].$r;
 		return $r;
 	}
 
 	public function make_ifindex_table() {
 		global $snmp_oids;
-		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
-		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
+		if ($this->interface_method & method_snmp_ro)
+            $comm = $this->snmp_ro_comm;
+		elseif ($this->interface_method & method_snmp_rw)
+            $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
 
 		$s = 0;
@@ -94,8 +106,10 @@ class CSwitch extends CNetDevice {
 
 	public function make_bridge_table() {
 		global $snmp_oids;
-		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
-		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
+		if ($this->interface_method & method_snmp_ro)
+            $comm = $this->snmp_ro_comm;
+		elseif ($this->interface_method & method_snmp_rw)
+            $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
 
 		$s = 0;
@@ -141,7 +155,8 @@ class CSwitch extends CNetDevice {
 	public function check_snmp_ro() {
 		global $snmp_oids;
 		error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-		if ($this->alive && snmpwalk($this->ip, $this->snmp_ro_comm, $snmp_oids['SysName'])) $this->snmp_ro_avail = true;
+		if ($this->alive && snmpwalk($this->ip, $this->snmp_ro_comm, $snmp_oids['SysName']))
+            $this->snmp_ro_avail = true;
 		else $this->snmp_ro_avail = false;
 		error_reporting(E_ALL & ~E_NOTICE);
 		return $this->snmp_ro_avail;
@@ -150,7 +165,8 @@ class CSwitch extends CNetDevice {
 	public function check_snmp_rw() {
 		global $snmp_oids;
 		error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-		if ($this->alive && snmpwalk($this->ip, $this->snmp_rw_comm, $snmp_oids['SysName'])) $this->snmp_rw_avail = true;
+		if ($this->alive && snmpwalk($this->ip, $this->snmp_rw_comm, $snmp_oids['SysName']))
+            $this->snmp_rw_avail = true;
 		else $this->snmp_rw_avail = false;
 		error_reporting(E_ALL & ~E_NOTICE);
 		return $this->snmp_rw_avail;
@@ -168,9 +184,12 @@ class CSwitch extends CNetDevice {
 	public function check_interface_methods($try_telnet = false) {
 		$this->interface_method = method_unknown;
 
-		if ($this->check_snmp_ro()) $this->interface_method = $this->interface_method | method_snmp_ro;
-		if ($this->check_snmp_rw()) $this->interface_method = $this->interface_method | method_snmp_rw;
-		if ($try_telnet && $this->check_telnet()) $this->interface_method = $this->interface_method | method_telnet;
+		if ($this->check_snmp_ro())
+            $this->interface_method = $this->interface_method | method_snmp_ro;
+		if ($this->check_snmp_rw())
+            $this->interface_method = $this->interface_method | method_snmp_rw;
+		if ($try_telnet && $this->check_telnet())
+            $this->interface_method = $this->interface_method | method_telnet;
 
 		return $this->interface_method;
 	}
@@ -179,12 +198,12 @@ class CSwitch extends CNetDevice {
 		$this->interface_method = method_unknown;
 		global $testtesttest;
 		$testtesttest = '';
-		if ($method == method_snmp_ro)
-			if ($this->check_snmp_ro()) $this->interface_method = $this->interface_method | method_snmp_ro;
-		if ($method == method_snmp_rw)
-			if ($this->check_snmp_rw()) $this->interface_method = $this->interface_method | method_snmp_rw;
-		if ($method == method_telnet)
-			if ($this->check_telnet()) $this->interface_method = $this->interface_method | method_telnet;
+		if (($method == method_snmp_ro) && ($this->check_snmp_ro()))
+            $this->interface_method = $this->interface_method | method_snmp_ro;
+		if (($method == method_snmp_rw) && ($this->check_snmp_rw()))
+            $this->interface_method = $this->interface_method | method_snmp_rw;
+		if (($method == method_telnet) && ($this->check_telnet()))
+            $this->interface_method = $this->interface_method | method_telnet;
 
 
 		return $this->interface_method;
