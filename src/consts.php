@@ -1,8 +1,5 @@
 <?php
 
-global $consts;
-
-$consts = array();
 //----------------PROVIDER SPECIFIC--------------------------------------------------------
 $consts['TFTP']['IP']							=	'192.168.0.1';
 $consts['TFTP']['FIRMWARE']['DES-3000']					=	'DES-3010-firmw.had';
@@ -45,7 +42,6 @@ $consts['TELNET']['AUTH']['TACACS']['password']				=	'password2';
 $consts['TELNET']['AUTH']['OLDBASIC']['login']				=	'oldlocaladmin';
 $consts['TELNET']['AUTH']['OLDBASIC']['password']			=	'password3';
 
-
 //----------------SNMP---------------------------------------------------------------------
 $consts['SNMP']['SNMPOID']['SysName']					=	'SNMPv2-MIB::sysName';
 $consts['SNMP']['SNMPOID']['SysLocation']				=	'SNMPv2-MIB::sysLocation';
@@ -58,6 +54,7 @@ $consts['SNMP']['SNMPOID']['ifName']					=	'IF-MIB::ifName';
 $consts['SNMP']['SNMPOID']['ifIndex']					=	'IF-MIB::ifIndex';
 $consts['SNMP']['SNMPOID']['ifAlias']					=	'IF-MIB::ifAlias';
 $consts['SNMP']['SNMPOID']['ifSpeed']					=	'IF-MIB::ifSpeed';
+$consts['SNMP']['SNMPOID']['ifPhysAddress']				=	'IF-MIB::ifPhysAddress';
 $consts['SNMP']['SNMPOID']['ifInErrors']				=	'IF-MIB::ifInErrors';
 $consts['SNMP']['SNMPOID']['ifInDiscards']				=	'IF-MIB::ifInDiscards';
 $consts['SNMP']['SNMPOID']['ifHCInOctets']				=	'IF-MIB::ifHCInOctets';
@@ -66,6 +63,10 @@ $consts['SNMP']['SNMPOID']['ifInNUcastPkts']				=	'IF-MIB::ifInNUcastPkts';
 $consts['SNMP']['SNMPOID']['ifOutNUcastPkts']				=	'IF-MIB::ifOutNUcastPkts';
 $consts['SNMP']['SNMPOID']['ifInUcastPkts']				=	'IF-MIB::ifInUcastPkts';
 $consts['SNMP']['SNMPOID']['ifOutUcastPkts']				=	'IF-MIB::ifOutUcastPkts';
+$consts['SNMP']['SNMPOID']['ifInMulticastPkts']			=	'IF-MIB::ifInMulticastPkts';
+$consts['SNMP']['SNMPOID']['ifOutMulticastPkts']			=	'IF-MIB::ifOutMulticastPkts';
+$consts['SNMP']['SNMPOID']['ifInBroadcastPkts']			=	'IF-MIB::ifInBroadcastPkts';
+$consts['SNMP']['SNMPOID']['ifOutBroadcastPkts']			=	'IF-MIB::ifOutBroadcastPkts';
 
 $consts['SNMP']['SNMPOID']['ipArp']					=	'IP-MIB::ipNetToMediaPhysAddress';
 $consts['SNMP']['SNMPOID']['ipRouteDefault']				=	'SNMPv2-SMI::mib-2.16.19.12.0';
@@ -148,6 +149,13 @@ $consts['SNMP']['SNMPOID']['DES-3000']['LBD']['Recover']		=	'.2.18.1.3.0';
 $consts['SNMP']['SNMPOID']['DES-3000']['LBD']['PortAdmState']		=	'.2.18.2.1.1.2';
 $consts['SNMP']['SNMPOID']['DES-3000']['LBD']['PortStatus']		=	'.2.18.2.1.1.4';
 
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Status']		=	'.2.3.1.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmState']		=	'.2.3.2.1.4';
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmSpeed']		=	'.2.3.2.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Speed']		=	'.2.3.1.1.6';
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmFlowCtrl']		=	'.2.3.2.1.6';
+$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Notify']		=	'.2.3.2.1.8';
+
 $consts['SNMP']['SNMPOID']['DES-3000']['PortInfo']['AdmState']		=	'.2.2.2.1.2';
 $consts['SNMP']['SNMPOID']['DES-3000']['PortInfo']['AdmSpeed']		=	'.2.2.2.1.3';
 $consts['SNMP']['SNMPOID']['DES-3000']['PortInfo']['AdmFlowCtrl']	=	'.2.2.2.1.4';
@@ -191,13 +199,13 @@ $consts['SNMP']['SNMPOID']['DES-3500']['PortInfo']['AdmMDI']		=	'.2.4.5.1.10';
 $consts['SNMP']['SNMPOID']['DES-3500']['PortInfo']['Status']		=	'.2.4.4.1.5';
 $consts['SNMP']['SNMPOID']['DES-3500']['PortInfo']['Speed']		=	'.2.4.4.1.6';
 
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmState']		=	'.2.3.2.1.3';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmSpeed']		=	'.2.3.2.1.4';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['AdmFlowCtrl']	=	'.2.3.2.1.5';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Description']	=	'.2.3.2.1.9';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Notify']		=	'.2.3.2.1.7';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Status']		=	'.2.3.1.1.4';
-$consts['SNMP']['SNMPOID']['DGS-3000']['PortInfo']['Speed']		=	'.2.3.1.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['AdmState']		=	'.2.3.2.1.3';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['AdmSpeed']		=	'.2.3.2.1.4';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['AdmFlowCtrl']	=	'.2.3.2.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['Description']	=	'.2.3.2.1.9';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['Notify']		=	'.2.3.2.1.7';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['Status']		=	'.2.3.1.1.4';
+$consts['SNMP']['SNMPOID']['DGS-3024']['PortInfo']['Speed']		=	'.2.3.1.1.5';
 
 $consts['SNMP']['SNMPOID']['DGS-3400']['MgmVlan']			=	'.2.1.2.7.0';
 $consts['SNMP']['SNMPOID']['DGS-3400']['PortInfo']['AdmState']		=	'.2.3.2.1.4';
@@ -227,18 +235,72 @@ $consts['SNMP']['SNMPOID']['DGS-3600']['LBD']['Recover']		=	'.2.20.1.3.0';
 $consts['SNMP']['SNMPOID']['DGS-3600']['LBD']['PortAdmState']		=	'.2.20.2.1.1.2';
 $consts['SNMP']['SNMPOID']['DGS-3600']['LBD']['PortStatus']		=	'.2.20.2.1.1.4';
 
+$consts['SNMP']['SNMPOID']['DGS-3200']['LBD']['GlobalState']		=	'.2.18.1.1.0';
+$consts['SNMP']['SNMPOID']['DGS-3200']['LBD']['Interval']		=	'.2.18.1.2.0';
+$consts['SNMP']['SNMPOID']['DGS-3200']['LBD']['Recover']		=	'.2.18.1.3.0';
+$consts['SNMP']['SNMPOID']['DGS-3200']['LBD']['PortAdmState']		=	'.2.18.2.1.1.2';
+$consts['SNMP']['SNMPOID']['DGS-3200']['LBD']['PortStatus']		=	'.2.18.2.1.1.4';
+
+$consts['SNMP']['SNMPOID']['DGS-3200']['PortInfo']['AdmState']		=	'.2.3.2.1.4';
+$consts['SNMP']['SNMPOID']['DGS-3200']['PortInfo']['AdmSpeed']		=	'.2.3.2.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3200']['PortInfo']['AdmFlowCtrl']	=	'.2.3.2.1.6';
+$consts['SNMP']['SNMPOID']['DGS-3200']['PortInfo']['Status']		=	'.2.3.1.1.5';
+$consts['SNMP']['SNMPOID']['DGS-3200']['PortInfo']['Speed']		=	'.2.3.1.1.6';
+
+$consts['SNMP']['SNMPOID']['DES-1210']['CableDiag']				=	'.35.1.1';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['AdmState']	=	'.1.13.1.3';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['AdmSpeed']	=	'.1.13.1.3';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['AdmMDI']	=	'.1.13.1.5';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['AdmFlowCtrl']	=	'.1.13.1.6';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['Status']	=	'.1.13.1.4';
+$consts['SNMP']['SNMPOID']['DES-1210']['PortInfo']['Speed']	=	'.1.13.1.4';
+
+$consts['SNMP']['SNMPOID']['DGS-1210']['ipRouteDefault']		=	'SNMPv2-SMI::mib-2.16.19.12.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['CableDiag']				=	'.35.1.1';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['AdmState']	=	'.1.13.1.3';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['AdmSpeed']	=	'.1.13.1.3';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['AdmMDI']	=	'.1.13.1.5';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['AdmFlowCtrl']	=	'.1.13.1.6';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['Status']	=	'.1.13.1.4';
+$consts['SNMP']['SNMPOID']['DGS-1210']['PortInfo']['Speed']	=	'.1.13.1.4';
+
+$consts['SNMP']['SNMPOID']['DGS-1210']['LBD']['GlobalState']	=	'.17.1.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['LBD']['Interval']	=	'.17.3.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['LBD']['Recover']	=	'.17.4.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['LBD']['PortAdmState']	=	'.17.5.1.2';
+$consts['SNMP']['SNMPOID']['DGS-1210']['LBD']['PortStatus']	=	'.17.5.1.3';
+
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['State']			=	'.6.1.1.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['Version']		=	'.6.1.2.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['Priority']		=	'.6.1.3';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['FBPDU']			=	'.6.1.8.0';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['RootPort']		=	'.6.1.13';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['PortStatus']		=	'.6.2.1.2';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['AdminEdge']		=	'.6.2.1.7';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['OperEdge']		=	'.6.2.1.7';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['RestrictedRole']		=	'.6.2.1.9';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['RestrictedTCN']		=	'.6.2.1.10';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['PortRole']		=	'.6.2.1.12';
+$consts['SNMP']['SNMPOID']['DGS-1210']['STP']['PortFBPDU']		=	'.6.2.1.13';
+
+$consts['SNMP']['SNMPOID']['DGS-1210']['GVRP']['PVID']		=	'.11.5.1.2';
 
 $consts['SNMP']['SNMPOID']['DLink']['ID']				=	'.1.3.6.1.4.1.171';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DES-3000']		=	'.11.63';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DES-3028']		=	'.11.63';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DES-1228']		=	'.11.116';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DES-1210']		=	'.10.75';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-1210']		=	'.10.76';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DES-3200']		=	'.11.113.1';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DES-3500']		=	'.11.64';
-$consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3000']		=	'.11.68';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3024']		=	'.11.68';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DES-3800']		=	'.11.69';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3100']		=	'.10.94';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DXS-3300']		=	'.11.59';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3400']		=	'.11.70';
 $consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3600']		=	'.11.70';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3000']		=	'.11.133';
+$consts['SNMP']['SNMPOID']['DLink']['Series']['DGS-3200']		=	'.11.101';
 
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3010F']		=	'.1.1';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3010G']		=	'.1.2';
@@ -246,6 +308,9 @@ $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3018']		=	'.2';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3026']		=	'.3';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3010FL']		=	'.4';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3016']		=	'.10';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1228']		=	'.2';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1210-28/ME']	=	'.15.2';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-28/ME']	=	'.28.1';
 
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028']		=	'.6';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028P']		=	'.7';
@@ -291,6 +356,14 @@ $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3627G']		=	'.8';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3612G']		=	'.9';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3612']		=	'.10';
 
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3000-10TC']		= 	'.1.1';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3000-26TC']		= 	'.2.1';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3000-24TC']		= 	'.4.1';
+
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3200-10']	=	'.1';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3200-16']	=	'.2';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-3200-24']	=	'.3';
+
 $consts['SNMP']['SNMPOID']['DES-3226S']['FwVer']			=	'.1.3.6.1.4.1.171.11.48.1.1.1.1.1.1';
 //$consts['SNMP']['SNMPOID']['DES-3226S']['BootVer']			=	'.1.3.6.1.4.1.171.11.48.1.1.1.1.1.2.0';
 //$consts['SNMP']['SNMPOID']['DES-3226S']['HwVer']			=	'.1.3.6.1.4.1.171.11.48.1.1.1.1.1.3.0';
@@ -306,10 +379,6 @@ $consts['SNMP']['SNMPOID']['DGS-3100']['ipRouteDefault']		=	'IP-FORWARD-MIB::ipC
 
 $consts['SNMP']['SNMPOID']['Cisco']['PhysEntry']			=	'SNMPv2-SMI::mib-2.47.1.1.1.1';
 $consts['SNMP']['SNMPOID']['Cisco']['MacBridgeEntry']			=	'SNMPv2-SMI::mib-2.17.1.4.1.2';
-$consts['SNMP']['SNMPOID']['Cisco']['VlanList']				=	'.1.3.6.1.4.1.9.9.46.1.3.1.1';
-$consts['SNMP']['SNMPOID']['Cisco']['TrunkVlans']			=	'.1.3.6.1.4.1.9.9.46.1.6.1.1';
-$consts['SNMP']['SNMPOID']['Cisco']['AccessVlans']			=	'.1.3.6.1.4.1.9.9.68.1.2.2.1';
-
 
 $consts['SNMP']['SNMPOID']['EdgeCore']['ipRouteDefault']		=	'IP-FORWARD-MIB::ipCidrRouteNextHop.0.0.0.0.0.0.0.0.0';
 
@@ -328,6 +397,7 @@ $consts['SNMP']['SNMPOID']['RMON']['CollLate']				=	'.1.3.6.1.2.1.10.7.2.1.8';
 $consts['SNMP']['SNMPOID']['RMON']['CollExcessive']			=	'.1.3.6.1.2.1.10.7.2.1.9';
 
 $consts['SNMP']['SNMPOID']['LLDP']['RemoteData']			=	'.1.0.8802.1.1.2.1.4.1.1';
+$consts['SNMP']['SNMPOID']['LLDP']['LocalData']				=	'.1.0.8802.1.1.2.1.3.7.1';
 
 $consts['SNMP']['SNMPOUT']['Switch']['AdmStatus'][0]			=	'Disabled';
 $consts['SNMP']['SNMPOUT']['Switch']['AdmStatus'][1]			=	'Enabled';
@@ -340,6 +410,8 @@ $consts['SNMP']['SNMPOUT']['Switch']['Speed'][10000000]			=	'10M';
 $consts['SNMP']['SNMPOUT']['Switch']['Speed'][100000000]		=	'100M';
 $consts['SNMP']['SNMPOUT']['Switch']['Speed'][1000000000]		=	'1G';
 $consts['SNMP']['SNMPOUT']['Switch']['Speed'][10000000000]		=	'10G';
+
+$consts['SNMP']['SNMPOID']['H3COM']['ipRouteDefault']			=	'RFC1213-MIB::ipRouteNextHop.0.0.0.0';
 
 
 $consts['SNMP']['SNMPOUT']['DLink']['CableDiag'][0]			=	'OK';
@@ -492,24 +564,24 @@ $consts['SNMP']['SNMPOUT']['DES-3500']['PortInfo']['AdmSpeed'][6]	=	'100M/Full';
 $consts['SNMP']['SNMPOUT']['DES-3500']['PortInfo']['AdmSpeed'][7]	=	'1G/Half';
 $consts['SNMP']['SNMPOUT']['DES-3500']['PortInfo']['AdmSpeed'][8]	=	'1G/Full';
 
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][0]		=	'ERROR';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][1]		=	'Empty';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][2]		=	'LinkDown';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][3]		=	'10M/Half';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][4]		=	'10M/Full';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][5]		=	'100M/Half';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][6]		=	'100M/Full';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][7]		=	'1G/Half';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][8]		=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][0]		=	'ERROR';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][1]		=	'Empty';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][2]		=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][3]		=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][4]		=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][5]		=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][6]		=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][7]		=	'1G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['Speed'][8]		=	'1G/Full';
 
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][1]	=	'ERROR';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][2]	=	'Auto';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][3]	=	'10M/Half';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][5]	=	'100M/Half';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][6]	=	'100M/Full';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][9]	=	'1G/Full';
-$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][10]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][1]	=	'ERROR';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][2]	=	'Auto';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][3]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][5]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][6]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][9]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3024']['PortInfo']['AdmSpeed'][10]	=	'1G/Full';
 
 $consts['SNMP']['SNMPOUT']['DGS-3400']['PortInfo']['Speed'][0]		=	'LinkDown';
 $consts['SNMP']['SNMPOUT']['DGS-3400']['PortInfo']['Speed'][1]		=	'10M/Full';
@@ -571,6 +643,149 @@ $consts['SNMP']['SNMPOUT']['DGS-3600']['PortInfo']['AdmSpeed'][8]	=	'1G/Full';
 $consts['SNMP']['SNMPOUT']['DGS-3600']['PortInfo']['AdmSpeed'][9]	=	'1G/Full';
 $consts['SNMP']['SNMPOUT']['DGS-3600']['PortInfo']['AdmSpeed'][10]	=	'1G/Full';
 
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][0]		=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][1]		=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][2]		=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][3]		=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][4]		=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][5]		=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][6]		=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][7]		=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][8]		=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][9]		=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][10]		=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][11]		=	'1G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][12]		=	'1G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][13]		=	'10G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][14]		=	'10G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][15]		=	'10G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][16]		=	'10G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][17]		=	'Empty';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['Speed'][18]		=	'LinkDown';
+
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][1]	=	'ERROR';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][2]	=	'Auto';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][3]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][5]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][6]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][9]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3200']['PortInfo']['AdmSpeed'][10]	=	'1G/Full';
+
+$consts['SNMP']['SNMPOID']['DGS-3000']['MgmVlan']			=	'.3.2.1.3.1.5.6.83.121.115.116.101.109'; //Only "System" iface allowed
+
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][0]		=	'ERROR';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][1]		=	'Empty';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][2]		=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][3]		=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][4]		=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][5]		=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][6]		=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][7]		=	'1G/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][8]		=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['Speed'][9]		=	'10G/Full';
+
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][1]	=	'ERROR';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][2]	=	'Auto';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][3]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][5]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][6]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][8]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][9]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-3000']['PortInfo']['AdmSpeed'][10]	=	'1G/Full';
+
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][1]	=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][2]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][3]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][4]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][5]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Status'][6]	=	'LinkUp';
+
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][1]	=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][2]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][3]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][4]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][5]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['Speed'][6]	=	'10M/Half';
+
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][1]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][2]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][3]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][5]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][6]	=	'Auto';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['AdmSpeed'][7]	=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][1]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][2]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][3]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][4]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][5]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][6]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DES-1210']['PortInfo']['State'][7]	=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][1]	=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][2]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][3]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][4]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][5]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][6]	=	'LinkUp';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Status'][7]	=	'LinkUp';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][1]	=	'LinkDown';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][2]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][3]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][4]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][5]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][6]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['Speed'][6]	=	'10G/Full';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][1]	=	'1G/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][2]	=	'100M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][3]	=	'100M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][4]	=	'10M/Full';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][5]	=	'10M/Half';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][6]	=	'Auto';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['AdmSpeed'][7]	=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][1]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][2]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][3]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][4]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][5]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][6]	=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['PortInfo']['State'][7]	=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['State'][1]			=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['State'][2]			=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Version'][1]			=	'STP';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Version'][2]			=	'RSTP';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Version'][3]			=	'MSTP';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['FBPDU'][1]			=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['FBPDU'][2]			=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortRole'][1]		=	'Disabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortRole'][2]		=	'Discarding';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortRole'][4]		=	'Learning';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortRole'][5]		=	'Forwarding';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['AdminEdge'][0]		=	'False';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['AdminEdge'][1]		=	'True';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['AdminEdge'][2]		=	'Auto';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Edge'][0]		=	'False';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Edge'][1]		=	'True';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['Edge'][2]		=	'Auto';
+
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortFBPDU'][1]		=	'Enabled';
+$consts['SNMP']['SNMPOUT']['DGS-1210']['STP']['PortFBPDU'][2]		=	'Disabled';
+
+$consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][0]	=	'Disabled';
+$consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][1]		=	'Enabled';
+
 $consts['FEATURES']['GENERAL']['NetDevice']				=	':ping:';
 $consts['FEATURES']['GENERAL']['Switch']				=	':snmp:';
 
@@ -579,31 +794,47 @@ $consts['FEATURES']['SNMPRO']['DLink']					=	'';
 $consts['FEATURES']['SNMPRO']['Zyxel']					=	':genmgmt:mac:gvrp:rmon:';
 $consts['FEATURES']['SNMPRO']['DES-3000']				=	':vlan:genmgmt:mac:lldp:rmon:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['DES-3028']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
+$consts['FEATURES']['SNMPRO']['DES-1228']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['DES-3200']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['DES-3500']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['DES-3800']				=	':genmgmt:mac:gvrp:rmon:fwver:';
-$consts['FEATURES']['SNMPRO']['DGS-3000']				=	':vlan:genmgmt:mac:gvrp:rmon:fwver:portinfo:';
+$consts['FEATURES']['SNMPRO']['DGS-3024']				=	':vlan:genmgmt:mac:gvrp:rmon:fwver:portinfo:';
 $consts['FEATURES']['SNMPRO']['DGS-3100']				=	':genmgmt:mac:lldp:gvrp:rmon:fwver:';
 $consts['FEATURES']['SNMPRO']['DXS-3300']				=	':genmgmt:mac:gvrp:rmon:';
+$consts['FEATURES']['SNMPRO']['DGS-3200']				=	':genmgmt:rmon:fwver:stp:lbd:portinfo:lldp:';
 $consts['FEATURES']['SNMPRO']['DGS-3400']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['DGS-3600']				=	':vlan:genmgmt:mac:lldp:gvrp:rmon:fwver:stp:lbd:portinfo:';
+$consts['FEATURES']['SNMPRO']['DGS-3000']				= 	':vlan:genmgmt:mac:gvrp:rmon:fwver:stp:lbd:portinfo:';
+$consts['FEATURES']['SNMPRO']['DES-1210']				=	':fwver:portinfo:';
+$consts['FEATURES']['SNMPRO']['DGS-1210']				=	':genmgmt:lldp:gvrp:fwver:stp:lbd:portinfo:';
 $consts['FEATURES']['SNMPRO']['Cisco']					=	':genmgmt:mac:';
 $consts['FEATURES']['SNMPRO']['EdgeCore']				=	':genmgmt:mac:';
+$consts['FEATURES']['SNMPRO']['H3COM']					=	':genmgmt:lldp:';
+
 
 $consts['FEATURES']['SNMPRW']['DES-3000']				=	':save:reboot:cdiag:';
 $consts['FEATURES']['SNMPRW']['DES-3028']				=	':save:reboot:cdiag:';
+$consts['FEATURES']['SNMPRW']['DES-1228']				=	':save:reboot:cdiag:';
+$consts['FEATURES']['SNMPRW']['DES-1210']				= 	':cdiag:';
+$consts['FEATURES']['SNMPRW']['DGS-1210']				= 	':cdiag:';
 $consts['FEATURES']['SNMPRW']['DES-3200']				=	':save:reboot:cdiag:';
 $consts['FEATURES']['SNMPRW']['DES-3500']				=	':save:reboot:cdiag:';
+$consts['FEATURES']['SNMPRW']['DGS-3200']				= 	':cdiag:';
 $consts['FEATURES']['SNMPRW']['DGS-3400']				=	':save:reboot:';
 $consts['FEATURES']['SNMPRW']['DGS-3600']				=	':save:reboot:';
+$consts['FEATURES']['SNMPRW']['DGS-3000']				= 	':cdiag:';
+
 $consts['FEATURES']['TELNET']['DES-3000']				=	':ifmgmt:fwmgmt:vlanmgmt:';
 $consts['FEATURES']['TELNET']['DES-3028']				=	':ifmgmt:fwmgmt:vlanmgmt:';
+$consts['FEATURES']['TELNET']['DES-1228']				=	':ifmgmt:fwmgmt:vlanmgmt:';
 $consts['FEATURES']['TELNET']['DES-3200']				=	':ifmgmt:fwmgmt:vlanmgmt:';
 $consts['FEATURES']['TELNET']['DES-3500']				=	':ifmgmt:fwmgmt:vlanmgmt:';
 $consts['FEATURES']['TELNET']['DGS-3400']				=	':vlanmgmt:';
 $consts['FEATURES']['TELNET']['DGS-3600']				=	':vlanmgmt:';
 
 
+$consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['COOPER']['DGS-1210']			=	1;
+$consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['FIBER']['DGS-1210']			=	2;
 
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3010G']		=	511;			//0111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3010F']		=	511;			//0111111111
@@ -612,6 +843,9 @@ $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3016']		=	65535;			//11111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3018']		=	65535;			//001111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3026']		=	16777215;		//00111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028']		=	268435455;		//1111111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-1228']		=	67108863;		//0011111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-1210-28/ME']	=	67108863;		//0011111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-1210-28/ME']	=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028P']		=	268435455;		//1111111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028G']		=	268435455;		//1111111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3052']		=	4503599627370495;	//1x52
@@ -639,6 +873,12 @@ $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3612G']		=	3840;			//11110
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3627']		=	16777215;		//000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3627G']		=	15728640;		//000111100000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3650']		=	281474976710655;	//001x48
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3000-10TC']	=	1023;			//1111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3000-24TC']	=	16777215;		//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3000-26TC'] 	= 	16777215;		//00111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-10']	=	1023;			//1111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-16']	=	65535;			//1111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-24']	=	16777215;			//111111111111111111111111
 
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3010G']		=	512;			//1000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3010F']		=	512;			//1000000000
@@ -646,6 +886,9 @@ $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3010FL']		=	512;			//100000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3016']		=	0;			//0000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3018']		=	0;			//000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3026']		=	0;			//00000000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-1228']		=	251658240;              //1111000000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-1210-28/ME']		=	251658240;              //1111000000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-1210-28/ME']		=	251658240;		//1111000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028']		=	50331648;		//0011000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028P']		=	50331648;		//0011000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028G']		=	251658240;		//1111000000000000000000000000
@@ -675,6 +918,12 @@ $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3612G']		=	4095;			//111111
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3627']		=	15728640;		//000111100000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3627G']		=	16777215;		//000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3650']		=	263882790666240;	//0011110x44
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3000-10TC']	=	768;		//1100000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3000-24TC']	=	983040;		//111100000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3000-26TC']	=	66060288;		//11111100000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-10']	=	768;		//1100000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-16']	=	98304;		//1100000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-24']	=	25165824;		//110000000000000000000000
 
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3010G']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3010F']		=	0;
@@ -682,6 +931,7 @@ $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3010FL']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3016']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3018']		=	196608;			//110000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3026']		=	50331648;		//11000000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-1228']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3028']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3028P']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3028G']		=	0;
@@ -702,6 +952,10 @@ $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3612G']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3627']		=	117440512;		//111000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3627G']		=	117440512;		//111000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3650']		=	844424930131968;	//110x48
+$consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3000-10TC']		=	0;
+$consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3000-24TC']		=	0;
+$consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DGS-3000-26TC']		=	0;
+$consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-1210-28/ME']		=	0;
 
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3010G']			=	255;			//0011111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3010F']			=	255;			//0011111111
@@ -710,6 +964,8 @@ $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3016']			=	65535;			//11111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3018']			=	65535;			//001111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3026']			=	16777215;		//00111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028']			=	16777215;		//0000111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DES-1228']			=	16777215;		//0000111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DES-1210-28/ME']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028P']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028G']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3052']			=	281474976710655;	//1x48
@@ -730,6 +986,12 @@ $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3612G']			=	3840;			//111100000000
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3627']			=	16777215;		//000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3627G']			=	15728640;		//000111100000000000000000000
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3650']			=	281474976710655;	//001x48
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3000-10TC']		=	1023;			//1111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3000-24TC']		=	16777215;			//1111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3000-26TC']			=	16777215; 		//00111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-10']	=	1023;			//1111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-16']	=	65535;			//1111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-24']	=	16777215;			//111111111111111111111111
 
 $consts['HARDWARE']['SERIES']['DES-3010G']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-3010F']				=	'DES-3000';
@@ -737,6 +999,9 @@ $consts['HARDWARE']['SERIES']['DES-3010FL']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-3016']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-3018']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-3026']				=	'DES-3000';
+$consts['HARDWARE']['SERIES']['DES-1228']				=	'DES-1228';
+$consts['HARDWARE']['SERIES']['DES-1210-28/ME']				=	'DES-1210';
+$consts['HARDWARE']['SERIES']['DGS-1210-28/ME']				=	'DGS-1210';
 $consts['HARDWARE']['SERIES']['DES-3028']				=	'DES-3028';
 $consts['HARDWARE']['SERIES']['DES-3028P']				=	'DES-3028';
 $consts['HARDWARE']['SERIES']['DES-3028G']				=	'DES-3028';
@@ -753,8 +1018,8 @@ $consts['HARDWARE']['SERIES']['DES-3828P']				=	'DES-3800';
 $consts['HARDWARE']['SERIES']['DES-3828DC']				=	'DES-3800';
 $consts['HARDWARE']['SERIES']['DES-3852']				=	'DES-3800';
 $consts['HARDWARE']['SERIES']['DES-3852P']				=	'DES-3800';
-$consts['HARDWARE']['SERIES']['DGS-3024']				=	'DGS-3000';
-$consts['HARDWARE']['SERIES']['DGS-3048']				=	'DGS-3000';
+$consts['HARDWARE']['SERIES']['DGS-3024']				=	'DGS-3024';
+$consts['HARDWARE']['SERIES']['DGS-3048']				=	'DGS-3024';
 $consts['HARDWARE']['SERIES']['DGS-3100-24']				=	'DGS-3100';
 $consts['HARDWARE']['SERIES']['DXS-3324SRi']				=	'DXS-3300';
 $consts['HARDWARE']['SERIES']['DXS-3324SR']				=	'DXS-3300';
@@ -771,12 +1036,22 @@ $consts['HARDWARE']['SERIES']['DGS-3612G']				=	'DGS-3600';
 $consts['HARDWARE']['SERIES']['DGS-3627']				=	'DGS-3600';
 $consts['HARDWARE']['SERIES']['DGS-3627G']				=	'DGS-3600';
 $consts['HARDWARE']['SERIES']['DGS-3650']				=	'DGS-3600';
+$consts['HARDWARE']['SERIES']['DGS-3000-10TC']				=	'DGS-3000';
+$consts['HARDWARE']['SERIES']['DGS-3000-24TC']				=	'DGS-3000';
+$consts['HARDWARE']['SERIES']['DGS-3000-26TC']				=	'DGS-3000';
 $consts['HARDWARE']['SERIES']['DIR-100']				=	'NetDevice';
+$consts['HARDWARE']['SERIES']['DGS-3200-10']			=	'DGS-3200';
+$consts['HARDWARE']['SERIES']['DGS-3200-16']			=	'DGS-3200';
+$consts['HARDWARE']['SERIES']['DGS-3200-24']			=	'DGS-3200';
+
+
+#######
 
 
 global $snmp_oids;
 global $snmp_out;
 snmp_set_quick_print(true);
+snmp_set_valueretrieval(SNMP_VALUE_LIBRARY);
 $snmp_oids = &$consts['SNMP']['SNMPOID'];
 $snmp_out = &$consts['SNMP']['SNMPOUT'];
 ?>

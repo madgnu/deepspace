@@ -34,6 +34,20 @@ class CDlink extends CSwitch {
 		$this->model_name = $model;
 		$this->series = $series;
 		$this->make_prefix($series, $model);
+		$this->choose_port_postfix_snmp();
+	}
+
+	protected function choose_port_postfix_snmp() {
+		global $consts;
+		if (isset($consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['COOPER'][$this->series]))
+			$this->snmp_port_postfix_cooper = $consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['COOPER'][$this->series];
+		else
+			$this->snmp_port_postfix_cooper = 100;
+
+		if (isset($consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['FIBER'][$this->series]))
+			$this->snmp_port_postfix_fiber = $consts['HARDWARE']['SWITCH']['PORTPOSTFIX']['FIBER'][$this->series];
+		else
+			$this->snmp_port_postfix_fiber = 101;
 	}
 
 	protected function make_prefix($series, $model) {
@@ -507,25 +521,12 @@ class CDlink extends CSwitch {
 		return false;
 	}
 
-	public function add_snmp_ro() {
-		if ($this->interface_method & method_telnet)
-			return $this->_telnet_add_snmp_ro();
-
-		return false;
-	}
-
-	public function add_snmp_rw() {
-		if ($this->interface_method & method_telnet)
-			return $this->_telnet_add_snmp_rw();
-
-		return false;
-	}
-
 	public function add_snmp() {
-		return $this->add_snmp_ro() && $this->add_snmp_rw();
+		if ($this->interface_method & method_telnet)
+			return $this->_telnet_add_snmp();
+
+		return false;
 	}
-
-
 
 
 	//---------------------------------SNMP_CHECKS-------------------------------------
@@ -555,30 +556,32 @@ class CDlink extends CSwitch {
 		if ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
 
+		$cdiag_oid = isset($snmp_oids[$this->series]['CableDiag']) ? $this->snmp_prefix . $snmp_oids[$this->series]['CableDiag'] : $snmp_oids['DLink']['CableDiag'];
+
 		$cdiag_ready = false;
-		if (!snmpset($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.12.'.$port, 'i', '1')) return false;
+		if (!snmpset($this->ip, $comm, $cdiag_oid.'.12.'.$port, 'i', '1')) return false;
 		for ($i = 1; $i < 50; $i++) {
-			$processing = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.12.'.$port);
+			$processing = snmpget($this->ip, $comm, $cdiag_oid.'.12.'.$port);	
 			if ($processing ==  2) { usleep(50000); continue; } else { $cdiag_ready =  true; break; }
 
 		}
 		if (!$cdiag_ready) return false;
 
-		$cableDiagPortType = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.2.'.$port);
+		$cableDiagPortType = snmpget($this->ip, $comm, $cdiag_oid.'.2.'.$port);
 
 		if (!isset($cableDiagPortType) || ($cableDiagPortType != 0 && $cableDiagPortType != 1)) return false;
 
-		$cableDiagLinkStatus  = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.3.'.$port);
+		$cableDiagLinkStatus  = snmpget($this->ip, $comm, $cdiag_oid.'.3.'.$port);
 
-		$cableDiagPair1Status = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.4.'.$port);
-		$cableDiagPair2Status = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.5.'.$port);
-		if ($cableDiagPortType == 1) $cableDiagPair3Status = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.6.'.$port);
-		if ($cableDiagPortType == 1) $cableDiagPair4Status = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.7.'.$port);
+		$cableDiagPair1Status = snmpget($this->ip, $comm, $cdiag_oid.'.4.'.$port);
+		$cableDiagPair2Status = snmpget($this->ip, $comm, $cdiag_oid.'.5.'.$port);
+		if ($cableDiagPortType == 1) $cableDiagPair3Status = snmpget($this->ip, $comm, $cdiag_oid.'.6.'.$port);
+		if ($cableDiagPortType == 1) $cableDiagPair4Status = snmpget($this->ip, $comm, $cdiag_oid.'.7.'.$port);
 
-		$cableDiagPair1Length = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.8.'.$port);
-		$cableDiagPair2Length = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.9.'.$port);
-		if ($cableDiagPortType == 1) $cableDiagPair3Length = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.10.'.$port);
-		if ($cableDiagPortType == 1) $cableDiagPair4Length = snmpget($this->ip, $comm, $snmp_oids['DLink']['CableDiag'].'.11.'.$port);
+		$cableDiagPair1Length = snmpget($this->ip, $comm, $cdiag_oid.'.8.'.$port);
+		$cableDiagPair2Length = snmpget($this->ip, $comm, $cdiag_oid.'.9.'.$port);
+		if ($cableDiagPortType == 1) $cableDiagPair3Length = snmpget($this->ip, $comm, $cdiag_oid.'.10.'.$port);
+		if ($cableDiagPortType == 1) $cableDiagPair4Length = snmpget($this->ip, $comm, $cdiag_oid.'.11.'.$port);
 
 		if ($cableDiagPair1Status != 7) $cP1S = $snmp_out['DLink']['CableDiag'][$cableDiagPair1Status];
 		if ($cableDiagPair2Status != 7) $cP2S = $snmp_out['DLink']['CableDiag'][$cableDiagPair2Status];
@@ -669,22 +672,29 @@ class CDlink extends CSwitch {
 	protected function _snmp_port_adm_state($port, $type) {
 		global $snmp_oids;
 
+		if (!isset($snmp_oids[$this->series]['PortInfo']['AdmState'])) $oid = $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['AdmState'];
+		else $oid = $this->snmp_prefix.$snmp_oids[$this->series]['PortInfo']['AdmState'];
+
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber; //if type == 0, then it is cooper, else - fiber
 
-		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['AdmState'].'.'.$port.'.'.$type);
+		return snmpget($this->ip, $comm, $oid.'.'.$port.'.'.$type);
 	}
 
 	protected function _snmp_port_adm_speed($port, $type) {
 		global $snmp_oids;
+
+		if (!isset($snmp_oids[$this->series]['PortInfo']['AdmSpeed'])) $oid = $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['AdmSpeed'];
+		else $oid = $this->snmp_prefix.$snmp_oids[$this->series]['PortInfo']['AdmSpeed'];
+
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
-		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['AdmSpeed'].'.'.$port.'.'.$type);
+		return snmpget($this->ip, $comm, $oid.'.'.$port.'.'.$type);
 	}
 
 	protected function _snmp_port_adm_flowctrl($port, $type) {
@@ -692,7 +702,7 @@ class CDlink extends CSwitch {
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
 		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['AdmFlowCtrl'].'.'.$port.'.'.$type);
 	}
@@ -702,7 +712,7 @@ class CDlink extends CSwitch {
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
 		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Description'].'.'.$port.'.'.$type);
 	}
@@ -712,29 +722,37 @@ class CDlink extends CSwitch {
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
 		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Learning'].'.'.$port.'.'.$type);
 	}
 
 	protected function _snmp_port_status($port, $type) {
 		global $snmp_oids;
+
+		if (!isset($snmp_oids[$this->series]['PortInfo']['Status'])) $oid = $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Status'];
+		else $oid = $this->snmp_prefix.$snmp_oids[$this->series]['PortInfo']['Status'];
+
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
-		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Status'].'.'.$port.'.'.$type);
+		return snmpget($this->ip, $comm, $oid.'.'.$port.'.'.$type);
 	}
 
 	protected function _snmp_port_speed($port, $type) {
 		global $snmp_oids;
+
+		if (!isset($snmp_oids[$this->series]['PortInfo']['Speed'])) $oid = $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Speed'];
+		else $oid = $this->snmp_prefix.$snmp_oids[$this->series]['PortInfo']['Speed'];
+
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
-		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['Speed'].'.'.$port.'.'.$type);
+		return snmpget($this->ip, $comm, $oid.'.'.$port.'.'.$type);
 	}
 
 	protected function _snmp_port_flowctrl($port, $type) {
@@ -742,7 +760,7 @@ class CDlink extends CSwitch {
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-		if (!$type) $type = 100; else $type = 101; //if type == 0, then it is cooper, else - fiber
+		if (!$type) $type = $this->snmp_port_postfix_cooper; else $type = $this->snmp_port_postfix_fiber;  //if type == 0, then it is cooper, else - fiber
 
 		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids['DLink']['PortInfo']['FlowCtrl'].'.'.$port.'.'.$type);
 	}
@@ -1230,6 +1248,29 @@ class CDlink extends CSwitch {
 
 	}
 
+	public function _snmp_get_lldp_local_ports() {
+		global $snmp_oids;
+		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
+		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
+		if (!isset($comm)) return false;
+
+		$s = 0;
+		$s = snmprealwalk($this->ip, $comm, $snmp_oids['LLDP']['LocalData'].'.3');
+		if (!$s) return false;
+		$this->ports['LLDP']['LocalPorts'] = 0;
+		$this->ports['LLDP']['LocalPorts'] = array();
+
+		foreach ($s as $k => $v) {
+			$matches = 0;
+			preg_match('/\.([0-9]+)$/', $k, $matches);
+			if (count($matches) == 2) {
+				$port_id = $matches[1];
+				$this->ports['LLDP']['LocalPorts'][$port_id] = (integer)$port_id;
+			}
+		}
+		return true;
+	}
+
 	protected function _snmp_save() {
 		global $snmp_oids;
 		//save
@@ -1310,34 +1351,34 @@ class CDlink extends CSwitch {
 		return false;
 	}
 
-	protected function _telnet_delete_vlan($vlan) {
+	protected function _telnet_delete_vlan($vlanid) {
 		if (!$this->telnet->keepAlive())
 			if (!$this->_telnet_reconnect()) return false;
 
-		$r = $this->telnet->exec("delete vlan $vlan");
+		$r = $this->telnet->exec("delete vlan vlanid $vlanid");
 		if (!$r) return false;
 		$output = $this->telnet->getBuffer();
 		if (preg_match('/Success/i', $output)) return true;
 		return false;
 	}
 
-	protected function _telnet_add_vlan_to_port($vlan, $portlist, $type = 0) {
+	protected function _telnet_add_vlan_to_port($vlanid, $portlist, $type = 0) {
 		if (!$this->telnet->keepAlive())
 			if (!$this->_telnet_reconnect()) return false;
 
 		if (!$type) $type = 'tagged'; else $type = 'untagged';
-		$r = $this->telnet->exec("config vlan $vlan add $type $portlist");
+		$r = $this->telnet->exec("config vlan vlanid $vlanid add $type $portlist");
 		if (!$r) return false;
 		$output = $this->telnet->getBuffer();
 		if (preg_match('/Success/i', $output)) return true;
 		return false;
 	}
 
-	protected function _telnet_delete_vlan_from_port($vlan, $portlist) {
+	protected function _telnet_delete_vlan_from_port($vlanid, $portlist) {
 		if (!$this->telnet->keepAlive())
 			if (!$this->_telnet_reconnect()) return false;
 
-		$r = $this->telnet->exec("config vlan $vlan delete $portlist");
+		$r = $this->telnet->exec("config vlan vlanid $vlanid delete $portlist");
 		if (!$r) return false;
 		$output = $this->telnet->getBuffer();
 		if (preg_match('/Success/i', $output)) return true;
@@ -1363,28 +1404,17 @@ class CDlink extends CSwitch {
 		return true;
 	}
 
-	protected function _telnet_add_snmp_ro() {
+	protected function _telnet_add_snmp() {
 		if (!$this->telnet->keepAlive())
 			if (!$this->_telnet_reconnect()) return false;
 
 		global $consts;
 		$ro_comm = $consts['SNMP']['ROCOMM'];
+		$rw_comm = $consts['SNMP']['RWCOMM'];
 		$r = $this->telnet->exec("create snmp community $ro_comm view CommunityView read_only");
 		if (!$r) return false;
 		$output = $this->telnet->getBuffer();
 		if (!preg_match('/Success/i', $output)) return false;
-		$r = $this->telnet->exec("enable snmp");
-		if ($r) return true;
-
-		return false;
-	}
-
-	protected function _telnet_add_snmp_rw() {
-		if (!$this->telnet->keepAlive())
-			if (!$this->_telnet_reconnect()) return false;
-
-		global $consts;
-		$rw_comm = $consts['SNMP']['RWCOMM'];
 		$r = $this->telnet->exec("create snmp community $rw_comm view CommunityView read_write");
 		if (!$r) return false;
 		$output = $this->telnet->getBuffer();
@@ -1394,7 +1424,6 @@ class CDlink extends CSwitch {
 
 		return false;
 	}
-
 
 	protected function _telnet_download_fw($fw_name, $tftp) {
 		if (!$this->telnet->keepAlive())

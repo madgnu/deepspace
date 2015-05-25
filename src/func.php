@@ -26,7 +26,7 @@ require_once('consts.php');
 }*/
 
 function ping($host, $timeout = 1, $attempts = 1) {
-	require_once('Net/Ping.php');
+	require_once("Net/Ping.php");
 	$ping = Net_Ping::factory();
 	$ping->setArgs(array('count'=>1, 'timeout'=>$timeout));
 	for ($i = 1; $i <= $attempts; $i++) {
@@ -104,9 +104,8 @@ function ManagmentVlanFromIP($ip) {
 	global $consts;
 	if (!isset($ip)) return false;
 	$net_list = $consts['NET']['MANAGMENT'];
-	foreach ($net_list as $vlan => $nets_array)
-		foreach ($nets_array as $net)
-			if (IpCIDRCheck($ip, $net)) return $vlan;
+	foreach ($net_list as $net => $vlan)
+		if (IpCIDRCheck($ip, $net)) return $vlan;
 	return false;
 }
 

@@ -4,7 +4,13 @@ require_once('func.php');
 require_once('consts.php');
 require_once('cdlink.php');
 
-class CDlink3600 extends CDlink {
+class CDlinkDgs3000 extends CDlink {
+
+	public function get_fw_ver() {
+		$tmp = parent::get_fw_ver();
+		if ($tmp) return 'Build ' . $tmp;
+		return false;
+	}
 
 	//---------------------------------SNMP_CHECKS-------------------------------------
 
@@ -82,6 +88,7 @@ class CDlink3600 extends CDlink {
 
 		return snmpget($this->ip, $comm, $this->snmp_prefix.$snmp_oids[$this->series]['PortInfo']['FlowCtrl'].'.'.$port.'.'.$type);
 	}
+
 
 }
 ?>
