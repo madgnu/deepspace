@@ -7,6 +7,18 @@ require_once('cdlink.php');
 class CDlink1210 extends CDlink {
 
 
+	public function get_self_mac() {
+		global $snmp_oids;
+
+		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
+		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
+		if (!isset($comm)) return false;
+
+		$ifindex = $this->get_ifindex('System');
+
+		return $this->_snmp_get_phys_address($ifindex);
+	}
+
 	//---------------------------------SNMP_CHECKS-------------------------------------
 
 	protected function _snmp_get_stp_state() {

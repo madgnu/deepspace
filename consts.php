@@ -1,5 +1,9 @@
 <?php
 
+global $consts;
+
+$consts = array();
+
 //----------------PROVIDER SPECIFIC--------------------------------------------------------
 $consts['TFTP']['IP']							=	'192.168.0.1';
 $consts['TFTP']['FIRMWARE']['DES-3000']					=	'DES-3010-firmw.had';
@@ -311,6 +315,7 @@ $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3016']		=	'.10';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1228']		=	'.2';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1210-28/ME']	=	'.15.2';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-28/ME']	=	'.28.1';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-28XS/ME']	=	'.39.1';
 
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028']		=	'.6';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028P']		=	'.7';
@@ -379,6 +384,7 @@ $consts['SNMP']['SNMPOID']['DGS-3100']['ipRouteDefault']		=	'IP-FORWARD-MIB::ipC
 
 $consts['SNMP']['SNMPOID']['Cisco']['PhysEntry']			=	'SNMPv2-SMI::mib-2.47.1.1.1.1';
 $consts['SNMP']['SNMPOID']['Cisco']['MacBridgeEntry']			=	'SNMPv2-SMI::mib-2.17.1.4.1.2';
+$consts['SNMP']['SNMPOID']['Cisco']['CableDiag']			=	'.1.3.6.1.4.1.9.9.390.1.2';//CISCO-CABLE-DIAG-MIB::ccdTdrObjects
 
 $consts['SNMP']['SNMPOID']['EdgeCore']['ipRouteDefault']		=	'IP-FORWARD-MIB::ipCidrRouteNextHop.0.0.0.0.0.0.0.0.0';
 
@@ -511,6 +517,16 @@ $consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][5]		=	'Forwarding';
 $consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][6]		=	'Broken';
 $consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][7]		=	'NonSTP';
 $consts['SNMP']['SNMPOUT']['DLink']['STP']['PortStatus'][8]		=	'Err-Disabled';
+
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][1]			=	'unknown';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][2]			=	'terminated';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][3]			=	'not Completed';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][4]			=	'not Supported';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][5]			=	'open';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][6]			=	'shorted';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][7]			=	'impedance mismatch';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][8]			=	'broken';
+$consts['SNMP']['SNMPOUT']['Cisco']['CableDiag'][9]			=	'indeterminate';
 
 $consts['SNMP']['SNMPOUT']['DES-3000']['PortInfo']['Speed'][1]		=	'LinkDown';
 $consts['SNMP']['SNMPOUT']['DES-3000']['PortInfo']['Speed'][2]		=	'10M/Full';
@@ -823,6 +839,9 @@ $consts['FEATURES']['SNMPRW']['DGS-3200']				= 	':cdiag:';
 $consts['FEATURES']['SNMPRW']['DGS-3400']				=	':save:reboot:';
 $consts['FEATURES']['SNMPRW']['DGS-3600']				=	':save:reboot:';
 $consts['FEATURES']['SNMPRW']['DGS-3000']				= 	':cdiag:';
+$consts['FEATURES']['SNMPRW']['C2960']					=	':cdiag:';
+$consts['FEATURES']['SNMPRW']['C2970']					=	':cdiag:';
+
 
 $consts['FEATURES']['TELNET']['DES-3000']				=	':ifmgmt:fwmgmt:vlanmgmt:';
 $consts['FEATURES']['TELNET']['DES-3028']				=	':ifmgmt:fwmgmt:vlanmgmt:';
@@ -846,6 +865,7 @@ $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028']		=	268435455;		//11
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-1228']		=	67108863;		//0011111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-1210-28/ME']	=	67108863;		//0011111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-1210-28/ME']	=	16777215;		//0000111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-1210-28XS/ME']	=	0;		//0x28
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028P']		=	268435455;		//1111111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3028G']		=	268435455;		//1111111111111111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DES-3052']		=	4503599627370495;	//1x52
@@ -889,6 +909,7 @@ $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3026']		=	0;			//0000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-1228']		=	251658240;              //1111000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-1210-28/ME']		=	251658240;              //1111000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-1210-28/ME']		=	251658240;		//1111000000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-1210-28XS/ME']		=	268435455;		//1x28
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028']		=	50331648;		//0011000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028P']		=	50331648;		//0011000000000000000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3028G']		=	251658240;		//1111000000000000000000000000
@@ -966,6 +987,8 @@ $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3026']			=	16777215;		//001111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-1228']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-1210-28/ME']			=	16777215;		//0000111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-1210-28/ME']			=	16777215;		//0000111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-1210-28XS/ME']			=	0;		//0x28
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028P']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028G']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3052']			=	281474976710655;	//1x48
@@ -992,6 +1015,24 @@ $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3000-26TC']			=	16777215; 		//001111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-10']	=	1023;			//1111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-16']	=	65535;			//1111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-3200-24']	=	16777215;			//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TC-L']['FA']			=	16777215;	//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TC-L']['GI']			=	3;			//11
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TC-S']['FA']			=	16777215;	//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TC-S']['GI']			=	3;			//11
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TT-L']['FA']			=	16777215;	//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-24TT-L']['GI']			=	3;			//11
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-48TT-L']['FA']			=	281474976710655;	//1x48
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-48TT-L']['GI']			=	15;			//1111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-8TC-L']['FA']			=	255;		//11111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960-8TC-L']['GI']			=	0;			//0
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960G-24TC-L']['GI']			=	1048575;	//000011111111111111111111
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2960G-48TC-L']['GI']			=	17592186044415;		//00001x44
+$consts['HARDWARE']['SWITCH']['CDIAG']['WS-C2970G-24TS-E']['GI']			=	16777215;	//111111111111111111111111
+
+$consts['HARDWARE']['SWITCH']['PORTINDEXOFFSET']['C2960']['FA']  		= 10000;
+$consts['HARDWARE']['SWITCH']['PORTINDEXOFFSET']['C2960']['GI']			= 10100;
+$consts['HARDWARE']['SWITCH']['PORTINDEXOFFSET']['C2970']['GI']			= 10100;
+
 
 $consts['HARDWARE']['SERIES']['DES-3010G']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-3010F']				=	'DES-3000';
@@ -1002,6 +1043,7 @@ $consts['HARDWARE']['SERIES']['DES-3026']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-1228']				=	'DES-1228';
 $consts['HARDWARE']['SERIES']['DES-1210-28/ME']				=	'DES-1210';
 $consts['HARDWARE']['SERIES']['DGS-1210-28/ME']				=	'DGS-1210';
+$consts['HARDWARE']['SERIES']['DGS-1210-28XS/ME']				=	'DGS-1210';
 $consts['HARDWARE']['SERIES']['DES-3028']				=	'DES-3028';
 $consts['HARDWARE']['SERIES']['DES-3028P']				=	'DES-3028';
 $consts['HARDWARE']['SERIES']['DES-3028G']				=	'DES-3028';
@@ -1043,6 +1085,24 @@ $consts['HARDWARE']['SERIES']['DIR-100']				=	'NetDevice';
 $consts['HARDWARE']['SERIES']['DGS-3200-10']			=	'DGS-3200';
 $consts['HARDWARE']['SERIES']['DGS-3200-16']			=	'DGS-3200';
 $consts['HARDWARE']['SERIES']['DGS-3200-24']			=	'DGS-3200';
+
+$consts['HARDWARE']['SERIES']['WS-C2950-24']				=	'C2950';
+$consts['HARDWARE']['SERIES']['WS-C2950T-24']				=	'C2950';
+$consts['HARDWARE']['SERIES']['WS-C2960-24TC-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960-24TC-S']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960-24TT-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960-48TT-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960-8TC-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960G-24TC-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2960G-48TC-L']				=	'C2960';
+$consts['HARDWARE']['SERIES']['WS-C2970G-24TS-E']				=	'C2970';
+$consts['HARDWARE']['SERIES']['WS-C3550-12G']				=	'C3550';
+$consts['HARDWARE']['SERIES']['WS-C3550-24']				=	'C3550';
+$consts['HARDWARE']['SERIES']['WS-C3550-48']				=	'C3550';
+
+
+
+
 
 
 #######

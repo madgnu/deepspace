@@ -437,7 +437,6 @@ class CSwitch extends CNetDevice {
 		if (($this->interface_method & method_snmp_rw) or ($this->interface_method & method_snmp_ro))
 			return $this->get_arp($this->ip);
 		return false;
-
 	}
 
 	public function check_model() {
@@ -753,6 +752,15 @@ class CSwitch extends CNetDevice {
 		if (!isset($comm)) return false;
 
 		return snmpget($this->ip, $comm, $snmp_oids['ifOutUcastPkts'].'.'.$port);
+	}
+
+	protected function _snmp_get_phys_address($port) {
+		global $snmp_oids;
+		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
+		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
+		if (!isset($comm)) return false;
+
+		return snmpget($this->ip, $comm, $snmp_oids['ifPhysAddress'].'.'.$port);
 	}
 
 	protected function _snmp_get_gvrp_port_pvid($port) {

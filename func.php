@@ -80,6 +80,10 @@ function ConvertMac($mac, $style = 0, $use_delimetr = 1, $delimetr = '[^0-9a-f]'
 				hexdec($mp[0][6].$mp[0][7]).'.'.
 				hexdec($mp[0][8].$mp[0][9]).'.'.
 				hexdec($mp[0][10].$mp[0][11]); break;
+		case 3:
+			$newformat = strtolower($mp[0][0].$mp[0][1].$mp[0][2].$mp[0][3].'.'. //сisco
+				$mp[0][4].$mp[0][5].$mp[0][6].$mp[0][7].'.'.
+				$mp[0][8].$mp[0][9].$mp[0][10].$mp[0][11]); break;
 		default:
 			$newformat = strtolower($mp[0][0].$mp[0][1].':'. //default is billing
 				$mp[0][2].$mp[0][3].':'.
