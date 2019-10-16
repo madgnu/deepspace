@@ -18,31 +18,26 @@ $consts['FIRMWARE']['DES-3028']						=	'Build 2.52.B02';
 $consts['FIRMWARE']['DES-3200']						=	'Build 1.21.B007';
 $consts['FIRMWARE']['DES-3500']						=	'Build 6.00.B35';
 $consts['FIRMWARE']['DES-3800']						=	'Build 4.61.B21';
-$consts['FIRMWARE']['DGS-3000']						=	'Build 4.01-B07';
+$consts['FIRMWARE']['DGS-3024']						=	'Build 4.01-B07';
+$consts['FIRMWARE']['DGS-3000']						=	'Build 1.01.B006';
 $consts['FIRMWARE']['DGS-3100']						=	'Build 3.60.38';
 $consts['FIRMWARE']['DGS-3400']						=	'Build 2.70.B56';
 $consts['FIRMWARE']['DGS-3600']						=	'Build 2.55.B05';
 
 $consts['SNMP']['ROCOMM']						= 	'public';
 $consts['SNMP']['RWCOMM']						= 	'private';
-
 $consts['NET']['MANAGMENT'][10][0]					=	'192.168.0.0/24';
 $consts['NET']['MANAGMENT'][10][1]					=	'192.168.1.0/24';
-
 $consts['NET']['MANAGMENT'][11][0]					=	'192.168.2.0/24';
 $consts['NET']['MANAGMENT'][11][1]					=	'192.168.3.0/24';
-
 $consts['SENSOR']['192.168.0.0/24']					=	'SENSOR1';
 $consts['SENSOR']['192.168.1.0/24']					=	'SENSOR1';
 $consts['SENSOR']['192.168.2.0/24']					=	'SENSOR2';
 $consts['SENSOR']['192.168.3.0/24']					=	'SENSOR2';
-
 $consts['TELNET']['AUTH']['BASIC']['login']				=	'localadmin';
 $consts['TELNET']['AUTH']['BASIC']['password']				=	'password';
-
 $consts['TELNET']['AUTH']['TACACS']['login']				=	'tacacsadmin';
 $consts['TELNET']['AUTH']['TACACS']['password']				=	'password2';
-
 $consts['TELNET']['AUTH']['OLDBASIC']['login']				=	'oldlocaladmin';
 $consts['TELNET']['AUTH']['OLDBASIC']['password']			=	'password3';
 
@@ -316,6 +311,7 @@ $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1228']		=	'.2';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-1210-28/ME']	=	'.15.2';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-28/ME']	=	'.28.1';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-28XS/ME']	=	'.39.1';
+$consts['SNMP']['SNMPOID']['DLink']['Models']['DGS-1210-10/ME']	=	'.35.1';
 
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028']		=	'.6';
 $consts['SNMP']['SNMPOID']['DLink']['Models']['DES-3028P']		=	'.7';
@@ -418,6 +414,160 @@ $consts['SNMP']['SNMPOUT']['Switch']['Speed'][1000000000]		=	'1G';
 $consts['SNMP']['SNMPOUT']['Switch']['Speed'][10000000000]		=	'10G';
 
 $consts['SNMP']['SNMPOID']['H3COM']['ipRouteDefault']			=	'RFC1213-MIB::ipRouteNextHop.0.0.0.0';
+
+/*HUAWEI*/
+$consts['SNMP']['SNMPOID']['Huawei']['ipRouteDefault']			=	'RFC1213-MIB::ipRouteNextHop.0.0.0.0';
+$consts['SNMP']['SNMPOID']['Huawei']['macList']				=	'SNMPv2-SMI::enterprises.2011.5.25.42.2.1.3.1.4';
+$consts['SNMP']['SNMPOID']['Huawei']['FwVer']				=	'SNMPv2-SMI::enterprises.2011.5.25.19.1.4.2.1.5.1';
+
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['CRCErr']			=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.12';
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['Undersize']		=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.16';
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['Oversize']		=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.19';
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['Fragment']		=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.15';
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['Jabber']			=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.14';
+$consts['SNMP']['SNMPOID']['Huawei']['RMON']['Collision']		=	'SNMPv2-SMI::enterprises.2011.5.25.41.1.6.1.1.31';
+
+$consts['SNMP']['SNMPOID']['Huawei']['LBD']['Interval']			=	'SNMPv2-SMI::enterprises.2011.5.25.174.1.1.9';
+$consts['SNMP']['SNMPOID']['Huawei']['LBD']['Recover']			=	'SNMPv2-SMI::enterprises.2011.5.25.174.1.1.7.1.4.6';//берем у 0(6) порта значение
+$consts['SNMP']['SNMPOID']['Huawei']['LBD']['PortStatus']		=	'SNMPv2-SMI::enterprises.2011.5.25.174.1.1.7.1.6';
+$consts['SNMP']['SNMPOID']['Huawei']['LBD']['PortAdmStatus']		=	'SNMPv2-SMI::enterprises.2011.5.25.174.1.1.7.1.3';
+$consts['SNMP']['SNMPOID']['Huawei']['ifHighSpeed']			=	'IF-MIB::ifHighSpeed';
+
+
+$consts['SNMP']['SNMPOID']['Huawei']['PortInfo']['AdmState']		=	'IF-MIB::ifAdminStatus';
+
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['State']			=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.1.0';
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['Version']			=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.2';
+
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['PortFBPDU']		=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.20.1.32';
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['PortRole']			=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.20.1.33';
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['PortStatus']		=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.20.1.2';
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['AdmPortStatus']		=	'SNMPv2-SMI::enterprises.2011.5.25.42.4.1.20.1.23';
+$consts['SNMP']['SNMPOID']['Huawei']['STP']['LastTopologyChange']	=	'SNMPv2-SMI::mib-2.17.2.3';
+$consts['SNMP']['SNMPOID']['Huawei']['PVID']			=	'SNMPv2-SMI::enterprises.2011.5.25.42.1.1.1.3.1.4';
+
+/*--------const для Qtech преобразование из цифр в строку--------*/
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortStatus'][1]		=	'normal';
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortStatus'][2]		=	'blocking';
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortStatus'][3]		=	'shutdown';
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortStatus'][4]		=	'trap';
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortStatus'][5]		=	'noLearning';
+
+
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortAdmStatus'][1]		=	'enabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['LBD']['PortAdmStatus'][2]		=	'disabled';
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['State'][1]		=	'enabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['State'][2]		=	'disabled';
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['Version'][0]		=	'Stp';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['Version'][2]		=	'Rstp';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['Version'][3]		=	'Mstp';
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortFBPDU'][1]		=	'disabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortFBPDU'][2]		=	'enabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortFBPDU'][3]		=	'undo';
+
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][1]		=	'disabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][2]		=	'alternate';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][3]		=	'backup';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][4]		=	'root';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][5]		=	'designated';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortRole'][6]		=	'master';
+
+
+
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortStatus'][1]		=	'enabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['PortStatus'][2]		=	'disabled';
+
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['AdmPortStatus'][1]		=	'enabled';
+$consts['SNMP']['SNMPOUT']['Huawei']['STP']['AdmPortStatus'][2]		=	'disabled';
+
+/*QTECH*/
+$consts['SNMP']['SNMPOID']['Qtech']['ipRouteDefault']			=	'RFC1213-MIB::ipRouteNextHop.0.0.0.0';
+$consts['SNMP']['SNMPOID']['Qtech']['macDefault']			=	'IF-MIB::ifPhysAddress.3001';
+$consts['SNMP']['SNMPOID']['Qtech']['FwVer']				=	'SNMPv2-SMI::enterprises.27514.100.1.3';
+$consts['SNMP']['SNMPOID']['Qtech']['CableDiag']			=	'SNMPv2-SMI::enterprises.27514.100.3.2.1';
+
+$consts['SNMP']['SNMPOID']['Qtech']['LBD']['Interval']			=	'SNMPv2-SMI::enterprises.27514.100.3.4.2.1.0';
+$consts['SNMP']['SNMPOID']['Qtech']['LBD']['Recover']			=	'SNMPv2-SMI::enterprises.27514.100.3.4.2.2.0';
+$consts['SNMP']['SNMPOID']['Qtech']['LBD']['PortAdmState']		=	'SNMPv2-SMI::enterprises.27514.100.3.4.4.1.2';
+$consts['SNMP']['SNMPOID']['Qtech']['LBD']['PortStatus']		=	'SNMPv2-SMI::enterprises.27514.100.3.4.3.1.2';
+
+$consts['SNMP']['SNMPOID']['Qtech']['PortInfo']['AdmState']		=	'IF-MIB::ifAdminStatus';
+$consts['SNMP']['SNMPOID']['Qtech']['PortInfo']['AdmSpeed']		=	'SNMPv2-SMI::enterprises.27514.100.3.2.1.14';
+$consts['SNMP']['SNMPOID']['Qtech']['PortInfo']['Status']		=	'IF-MIB::ifOperStatus';
+$consts['SNMP']['SNMPOID']['Qtech']['PortInfo']['Speed']		=	'IF-MIB::ifSpeed';
+
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['Priority']			=	'SNMPv2-SMI::enterprises.27514.100.2.2.2.1.3.0';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['RootPort']			=	'SNMPv2-SMI::enterprises.27514.100.2.2.2.1.6.0';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['LastTopologyChange']	=	'SNMPv2-SMI::mib-2.17.2.3.0';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['TopologyChangeCount']	=	'SNMPv2-SMI::mib-2.17.2.4.0';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['State']			=	'SNMPv2-SMI::enterprises.27514.100.2.1.0';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['Version']			=	'SNMPv2-SMI::enterprises.27514.100.2.2.1.7.0';
+
+
+
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['PortRole']			=	'SNMPv2-SMI::enterprises.27514.100.2.2.3.1.10';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['PVID']			=	'SNMPv2-SMI::enterprises.27514.100.3.2.1.16';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['PortStatus']		=	'SNMPv2-SMI::enterprises.27514.100.2.2.3.1.9';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['AdmPortStatus']		=	'SNMPv2-SMI::enterprises.27514.100.2.2.4.1.2';
+$consts['SNMP']['SNMPOID']['Qtech']['STP']['PortFBPDU']			=	'SNMPv2-SMI::enterprises.27514.100.2.2.4.1.5';
+
+/*--------const для Qtech преобразование из цифр в строку--------*/
+$consts['SNMP']['SNMPOUT']['Qtech']['LBD']['PortStatus'][0]		=	'Nocontrol';
+$consts['SNMP']['SNMPOUT']['Qtech']['LBD']['PortStatus'][1]		=	'Shutdown';
+$consts['SNMP']['SNMPOUT']['Qtech']['LBD']['PortStatus'][2]		=	'Block';
+
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][0]		=	'auto';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][1]		=	'half10';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][2]		=	'full10';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][3]		=	'half100';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][4]		=	'full100';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][5]		=	'half1000';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][6]		=	'full1000';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][7]		=	'half-1000-M';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][8]		=	'half-1000-s';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][9]		=	'full-1000-M';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][10]		=	'full-1000-s';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][13]		=	'fx-100';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][14]		=	'fx-100-phy';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][15]		=	'fx-100-no-phy';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][16]		=	'neg-10-auto';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][17]		=	'neg-10-full';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][18]		=	'neg-10-half';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][19]		=	'neg-10-100-auto';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][20]		=	'neg-10-100-full';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][21]		=	'neg-10-100-half';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][22]		=	'neg-10-100-1000-full';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][23]		=	'neg-10-100-1000-half';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][24]		=	'neg-full-10g';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][25]		=	'full-10g';
+$consts['SNMP']['SNMPOUT']['Qtech']['PortInfo']['AdmSpeed'][26]		=	'full-40g';
+
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][0]		=	'nonstp';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][1]		=	'alternate';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][2]		=	'root';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][3]		=	'designated';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][4]		=	'backup';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][5]		=	'master';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortRole'][6]		=	'disabled';
+
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortStatus'][0]		=	'block';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortStatus'][1]		=	'forwarding';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortStatus'][2]		=	'learning';
+
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['AdmPortStatus'][0]		=	'disable';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['AdmPortStatus'][1]		=	'enable';
+
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortFBPDU'][0]		=	'default';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortFBPDU'][1]		=	'bpdufilter';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortFBPDU'][2]		=	'bpduguard';
+$consts['SNMP']['SNMPOUT']['Qtech']['STP']['PortFBPDU'][3]		=	'noportfast';
+
+/*--------Окончание const для Qtech--------*/
 
 
 $consts['SNMP']['SNMPOUT']['DLink']['CableDiag'][0]			=	'OK';
@@ -826,6 +976,8 @@ $consts['FEATURES']['SNMPRO']['DGS-1210']				=	':genmgmt:lldp:gvrp:fwver:stp:lbd
 $consts['FEATURES']['SNMPRO']['Cisco']					=	':genmgmt:mac:';
 $consts['FEATURES']['SNMPRO']['EdgeCore']				=	':genmgmt:mac:';
 $consts['FEATURES']['SNMPRO']['H3COM']					=	':genmgmt:lldp:';
+$consts['FEATURES']['SNMPRO']['Qtech']					=	':fwver:portinfo:mac:stp:vlan:genmgmt:gvrp:rmon:lldp:cdiag:';
+$consts['FEATURES']['SNMPRO']['Huawei']					=	':fwver:portinfo:mac:stp:vlan:genmgmt:gvrp:rmon:';
 
 
 $consts['FEATURES']['SNMPRW']['DES-3000']				=	':save:reboot:cdiag:';
@@ -899,6 +1051,7 @@ $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3000-26TC'] 	= 	16777215;	
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-10']	=	1023;			//1111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-16']	=	65535;			//1111111111111111
 $consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-3200-24']	=	16777215;			//111111111111111111111111
+$consts['HARDWARE']['SWITCH']['DLINK']['COOPER']['DGS-1210-10/ME']	=	255;			//11111111
 
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3010G']		=	512;			//1000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DES-3010F']		=	512;			//1000000000
@@ -945,6 +1098,7 @@ $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3000-26TC']	=	66060288;		//
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-10']	=	768;		//1100000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-16']	=	98304;		//1100000000000000
 $consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-3200-24']	=	25165824;		//110000000000000000000000
+$consts['HARDWARE']['SWITCH']['DLINK']['FIBER']['DGS-1210-10/ME']	=	768;		//1100000000
 
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3010G']		=	0;
 $consts['HARDWARE']['SWITCH']['DLINK']['SLOT']['DES-3010F']		=	0;
@@ -989,6 +1143,7 @@ $consts['HARDWARE']['SWITCH']['CDIAG']['DES-1228']			=	16777215;		//000011111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-1210-28/ME']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-1210-28/ME']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DGS-1210-28XS/ME']			=	0;		//0x28
+$consts['HARDWARE']['SWITCH']['CDIAG']['DGS-1210-10/ME']			=	255;		//0x0011111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028P']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3028G']			=	16777215;		//0000111111111111111111111111
 $consts['HARDWARE']['SWITCH']['CDIAG']['DES-3052']			=	281474976710655;	//1x48
@@ -1043,6 +1198,7 @@ $consts['HARDWARE']['SERIES']['DES-3026']				=	'DES-3000';
 $consts['HARDWARE']['SERIES']['DES-1228']				=	'DES-1228';
 $consts['HARDWARE']['SERIES']['DES-1210-28/ME']				=	'DES-1210';
 $consts['HARDWARE']['SERIES']['DGS-1210-28/ME']				=	'DGS-1210';
+$consts['HARDWARE']['SERIES']['DGS-1210-10/ME']				=	'DGS-1210';
 $consts['HARDWARE']['SERIES']['DGS-1210-28XS/ME']				=	'DGS-1210';
 $consts['HARDWARE']['SERIES']['DES-3028']				=	'DES-3028';
 $consts['HARDWARE']['SERIES']['DES-3028P']				=	'DES-3028';
@@ -1101,7 +1257,9 @@ $consts['HARDWARE']['SERIES']['WS-C3550-24']				=	'C3550';
 $consts['HARDWARE']['SERIES']['WS-C3550-48']				=	'C3550';
 
 
+$consts['HARDWARE']['SWITCH']['QTECH']['COOPER']['QSW-2800-28T-AC']	= 16777215;	//111111111111111111111111
 
+$consts['HARDWARE']['SWITCH']['QTECH']['FIBER']['QSW-2800-28T-AC']	=0;	//0
 
 
 

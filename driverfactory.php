@@ -13,6 +13,8 @@ require_once('cdlink1210.php');
 require_once('ccisco.php');
 require_once('czyxel.php');
 require_once('ch3c.php');
+require_once('chuawei.php');
+require_once('cqtech.php');
 require_once('cedgecore.php');
 
 
@@ -48,7 +50,11 @@ class CSwitchDriverFactory {
 			return new CEdgeCore($ip, $vendor, $model);
 		} elseif ($vendor == 'H3COM') {
 			return new CH3C($ip, $vendor, $model);
-		} else {
+		} elseif ($vendor == 'Qtech') {
+			return new CQtech($ip, $vendor, $model);
+		} elseif ($vendor == 'Huawei') {
+			return new CHuawei($ip, $vendor, $model);
+		} else { 
 			return new CSwitch($ip);
 		}
 		

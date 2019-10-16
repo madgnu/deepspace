@@ -90,6 +90,7 @@ class CSwitch extends CNetDevice {
 
 		$s = 0;
 		$s = snmprealwalk($this->ip, $comm, $snmp_oids['ifName']);
+
 		if (!$s) return false;
 		$this->iftable = array();
 		foreach ($s as $k => $v) {
@@ -126,7 +127,7 @@ class CSwitch extends CNetDevice {
 
 	public function get_ifindex($ifname) {
 		if (!isset($ifname)) return false;
-
+		
 		if (!isset($this->iftable)) $this->make_ifindex_table();
 		if (!isset($this->iftable)) return false;
 		return $this->iftable[$ifname];
@@ -143,6 +144,9 @@ class CSwitch extends CNetDevice {
 
 		return false;
 	}
+
+
+
 
 	public function check_snmp_ro() {
 		global $snmp_oids;
@@ -670,7 +674,7 @@ class CSwitch extends CNetDevice {
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
 
-		return snmpget($this->ip, $comm, $snmp_oids['ifHCInOctets'].'.'.$port);
+		return snmp2_get($this->ip, $comm, $snmp_oids['ifHCInOctets'].'.'.$port);
 	}
 
 	protected function _snmp_get_counters_bytes_outbound($port) {
@@ -679,7 +683,7 @@ class CSwitch extends CNetDevice {
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
 
-		return snmpget($this->ip, $comm, $snmp_oids['ifHCOutOctets'].'.'.$port);
+		return snmp2_get($this->ip, $comm, $snmp_oids['ifHCOutOctets'].'.'.$port);
 	}
 
 	protected function _snmp_get_counters_nonunicast_inbound($port) {
@@ -876,7 +880,6 @@ class CSwitch extends CNetDevice {
 		if ($this->interface_method & method_snmp_ro) $comm = $this->snmp_ro_comm;
 		elseif ($this->interface_method & method_snmp_rw) $comm = $this->snmp_rw_comm;
 		if (!isset($comm)) return false;
-
 		return snmpget($this->ip, $comm, $snmp_oids['ipRouteDefault']);
 	}
 
